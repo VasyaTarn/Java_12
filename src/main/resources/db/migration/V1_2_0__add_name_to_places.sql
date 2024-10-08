@@ -1,0 +1,2 @@
+ALTER TABLE public.places
+ADD COLUMN name VARCHAR(100) NOT NULL;

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+<body>
+<th:block th:include="/fragments/menu"></th:block>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each = "customer : ${customers}">
+        <th scope="row" th:utext="${customer.id}">...</th>
+        <td th:utext="${customer.name}">...</td>
+        <td th:utext="${customer.email}">...</td>
+        <td th:utext="${customer.phone}">...</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

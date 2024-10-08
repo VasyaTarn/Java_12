@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket assignment</title>
+</head>
+<body>
+<th:block th:include="/fragments/menu"></th:block>
+
+<div class="container mt-5">
+    <h2>Get ticket for user</h2>
+
+    <form name='getTicket' th:action="@{/customer/getTicket}" method='POST'>
+        <div>
+            <label for="customer">Select Customer</label>
+            <select id="customer" name="customerId">
+                <option value="">-- Select a Customer --</option>
+                <option th:each="customer : ${customers}"
+                        th:value="${customer.id}"
+                        th:text="${customer.name}">Customer Name</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="event">Select Event</label>
+            <select id="event" name="eventId">
+                <option value="">-- Select an Event --</option>
+                <option th:each="event : ${eventsDto}"
+                        th:value="${event.id}"
+                        th:text="${event.name + ' - ' + event.eventDate + ' at ' + event.placeName}">
+                    Event Information
+                </option>
+            </select>
+        </div>
+
+        <button type="submit">Get Ticket</button>
+    </form>
+</div>
+</body>
+</html>

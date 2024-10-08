@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Event</title>
+</head>
+<body>
+<th:block th:include="/fragments/menu"></th:block>
+
+<h1>Create Event</h1>
+<form th:action="@{/create-event}" th:object="${eventCreationDto}" method="post">
+    <label for="name">Event Name:</label>
+    <input type="text" id="name" th:field="*{name}" placeholder="Enter event name" required>
+    <br>
+
+    <label for="eventDate">Event Date:</label>
+    <input type="date" id="eventDate" th:field="*{eventDate}" required>
+    <br>
+
+    <h3>Place Information</h3>
+    <label for="placeName">Place Name:</label>
+    <input type="text" id="placeName" th:field="*{placeDto.name}" placeholder="Enter place name" required>
+    <br>
+
+    <label for="placeAddress">Place Address:</label>
+    <input type="text" id="placeAddress" th:field="*{placeDto.address}" placeholder="Enter place address" required>
+    <br>
+
+    <h3>Ticket Information</h3>
+    <div th:each="ticketPack, iterStat : ${eventCreationDto.ticketPacksDto}">
+        <label th:for="${'price' + iterStat.index}">Ticket Price:</label>
+        <input type="number" th:field="*{ticketPacksDto[__${iterStat.index}__].price}" th:id="${'price' + iterStat.index}" min="0" step="0.01" required>
+        <br>
+
+        <label th:for="${'quantity' + iterStat.index}">Ticket Quantity:</label>
+        <input type="number" th:field="*{ticketPacksDto[__${iterStat.index}__].quantity}" th:id="${'quantity' + iterStat.index}" min="1" required>
+        <br><br>
+    </div>
+
+    <!-- Кнопка для отправки формы -->
+    <button type="submit">Create Event</button>
+</form>
+</body>
+</html>
